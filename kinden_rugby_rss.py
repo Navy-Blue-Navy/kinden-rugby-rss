@@ -25,7 +25,16 @@ HEADERS = {
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/154.0.0.0 Safari/537.36"
     ),
-    "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.8",
+    "Accept": (
+        "text/html,application/xhtml+xml,application/xml;q=0.9,"
+        "image/avif,image/webp,image/apng,*/*;q=0.8"
+    ),
+    "Accept-Language": "ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache",
+    "Referer": "https://www.kinden-sports.jp/kindentridentblitzs/",
+    "Upgrade-Insecure-Requests": "1",
 }
 
 
@@ -122,9 +131,6 @@ for a in soup.find_all("a", href=True):
 
     # --------------------------------------------------
     # 日付を探す
-    #
-    # リンク自身 → 親要素へ順番に遡って
-    # 2026.09.25 のような日付を探す
     # --------------------------------------------------
 
     date_text = None
@@ -175,7 +181,7 @@ for a in soup.find_all("a", href=True):
             "%Y.%m.%d"
         )
 
-        # 公開時刻は掲載されていないため12:00 JSTとする
+        # サイトに時刻表示がないため12:00 JST
         dt = dt.replace(
             hour=12,
             minute=0,
